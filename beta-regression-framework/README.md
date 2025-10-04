@@ -1,173 +1,206 @@
-# Beta Regression Framework for Child Face Recognition
+# Beta Regression Framework for Child Face Recognition: A Methodological Framework with Simulation-Based Validation
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
-
-This repository contains the research materials, implementation code, and manuscript for the beta regression framework applied to longitudinal child face recognition systems.
+[![Paper Status](https://img.shields.io/badge/Status-Ready%20for%20Submission-brightgreen.svg)]()
 
 ## Overview
 
-Child face recognition serves a critical social mission—reuniting missing children with their families. This research addresses a methodological concern: when standard linear mixed models are inappropriately applied directly to bounded data, they can predict physically impossible recognition rates, exceeding **100% accuracy** for older children. Our beta regression framework ensures all predictions remain within valid probability bounds while providing better variance modeling and operational insights.
+This repository contains research addressing a critical methodological gap in child face recognition: when linear mixed models are inappropriately applied to bounded True Accept Rates (TAR), they can produce physically impossible predictions exceeding 100% accuracy. Our beta regression framework ensures mathematically valid predictions while providing superior variance modeling for operational biometric systems.
 
-**Paper Status**: Manuscript prepared following IEEE T-BIOM guidelines.
+**Paper Status**: Manuscript complete and ready for IEEE T-BIOM submission (14 pages)
 
-## Key Finding
+**Critical Finding**: In our simulation calibrated to published patterns, linear models produced 229 invalid predictions (>100% or <0%), while beta regression maintained 100% valid predictions with comparable fit (RMSE difference: 0.0016).
 
-> **"Linear mixed models produced 229 invalid predictions exceeding 100% accuracy in our simulations, while beta regression maintained 100% valid predictions throughout."**
+## Authors
 
-## Simulation Details
+**Aaron W. Storey** (Member, IEEE)
+Ph.D. Candidate, Computer Science
+Clarkson University, Potsdam, NY, USA
+storeyaw@clarkson.edu | ORCID: 0009-0009-5560-0015
 
-The synthetic dataset was generated using:
-```
-TAR_ij = logit^(-1)(β₀ + β₁·age_i + β₂·ΔT_ij + β₃·age_i×ΔT_ij + u_i + ε_ij)
-```
-where u_i ~ N(0, 0.15²) and ε_ij ~ N(0, 0.10²), with age-specific β₂ values: -0.35 (young), -0.08 (middle), -0.20 (older).
+**Masudul H. Imtiaz**
+Assistant Professor, Electrical & Computer Engineering
+Director, AI Vision, Health, Biometrics, and Applied Computing (AVHBAC) Lab
+Clarkson University, Potsdam, NY, USA
+mimtiaz@clarkson.edu | ORCID: 0000-0001-5528-482X
+
+## Paper Details
+
+**Full Title**: "Beta Regression Framework for Modeling Bounded Biometric Performance in Child Face Recognition: A Methodological Framework with Simulation-Based Validation"
+
+**Target Journal**: IEEE Transactions on Biometrics, Behavior, and Identity Science (T-BIOM)
+
+**Length**: 14 pages (10 regular + 4 MOPC)
+
+**Keywords**: Biometric evaluation, bounded outcomes, beta regression, child face recognition, longitudinal analysis, variance modeling, statistical methods
 
 ## Key Contributions
 
-1. **Methodological Guidance**: Shows when and how to use beta regression for bounded biometric data
-2. **Pedagogical Demonstration**: Illustrates risks when linear models are misapplied to bounded data
-3. **Discovers Operational Insights**: "Golden window" of facial stability (ages 5.5-7)
-4. **Enables Better Decisions**: 16-month improvement in re-enrollment timing for missing child searches
+1. **Hierarchical beta regression framework** for bounded biometric performance metrics
+2. **Controlled simulation** demonstrating methodological properties under known ground truth
+3. **Detailed validation protocol** (Section 8.5) for real-data validation on CLF/YFA datasets
+4. **Decision framework** (Table 4) for method selection
+5. **Integration guidance** (Section 3.5) with ROC curves, d-prime, and DET analysis
+6. **Deployment pathway** with realistic 12-18 month validation + 24-36 month pilot timeline
+
+## Major Additions & Revisions
+
+### Transparency on Synthetic Data
+- Title expanded to include "Simulation-Based Validation"
+- Section 1.5 "Scope and Contributions" clearly states synthetic-only limitations
+- Ethics statement added (no human subjects, IRB not required)
+- Conditional language throughout (e.g., "2-3 years, pending validation")
+- Collaboration invitation for researchers with CLF/YFA access
+
+### Methodological Integration
+- **Section 3.5**: How beta regression complements ROC/d-prime/DET methods
+- **Section 10.3**: "When NOT to Use Beta Regression" (score-level analysis, individual matching, real-time adaptation, etc.)
+- **Table 4**: Decision framework for practitioners
+- **Table 2**: Computational performance comparison (3-5x slower than linear)
+
+### Validation & Deployment
+- **Section 8.5**: Detailed protocol with success criteria and falsification conditions
+- **Section 11.5**: Path to operational deployment
+- Specific dataset targets: CLF (919 children, 2-18 years), YFA (330 subjects, 8-year tracking)
+
+## Simulation Details
+
+Synthetic data generated using:
+```
+TAR_ij = logit^(-1)(β₀ + β₁·age_i + β₂·ΔT_ij + β₃·age_i×ΔT_ij + u_i + ε_ij)
+```
+
+**Parameters calibrated to YFA patterns:**
+- u_i ~ N(0, 0.15²) - between-subject variation
+- ε_ij ~ N(0, 0.10²) - within-subject variability
+- β₂ = -0.35 (ages 3-5: steep decline)
+- β₂ = -0.08 (ages 5.5-7: stability)
+- β₂ = -0.20 (ages 7.5-9: delayed degradation)
+- 100 subjects per age group (300 total)
+- Annual observations over 8 years
+
+## Age-Specific Patterns (from YFA study)
+
+| Age Group | Pattern | TAR Change (6.5-8 years) |
+|-----------|---------|-------------------------|
+| 3-5 years | Rapid decline | 97.8% → 63.1% |
+| 5.5-7 years | **Stable "Golden Window"** | 97.9% → 80.2% |
+| 7.5-9 years | Delayed degradation | 98.3% → 65.6% |
+
+*Source: Bahmani et al. (2023), Table 3*
+
+## Model Comparison Results
+
+| Model | RMSE | R² | Invalid Predictions | Max Violation |
+|-------|------|-----|-------------------|---------------|
+| Linear Mixed | 0.0649 | 0.7600 | **229** | **>100%** |
+| Logit-transformed | 0.0770 | 0.6620 | 0 | — |
+| Beta Regression | 0.0665 | 0.7479 | **0** | — |
+
+*Beta regression eliminates boundary violations while maintaining comparable fit (RMSE difference: 0.0016)*
+
+## When to Use Beta Regression
+
+✅ **Use beta regression when:**
+- Modeling population-level recognition rates (TAR/FAR) over time
+- Long-term predictions (>2 years) where boundaries approached
+- Variance patterns impact operational decisions
+- Stakeholder communication requires interpretable percentages
+- Bounded outcome interpretation essential
+
+❌ **Do NOT use when:**
+- Working with raw similarity scores (use ROC analysis)
+- Individual matching decisions (use score-level methods)
+- Real-time threshold adaptation needed
+- Multimodal score fusion (use distributional methods)
+- Algorithm development/debugging (need failure mode analysis)
+- Short-term evaluations (<2 years with stable populations)
 
 ## Repository Structure
 
 ```
-BetaRegression_Framework/
-├── manuscript/              # Paper manuscript
-│   ├── paper.tex           # Main LaTeX source (10 pages)
-│   ├── paper.pdf           # Compiled paper (1.5MB)
-│   ├── references.bib      # Bibliography
-│   ├── compile_paper.sh    # Compilation script
+beta-regression-framework/
+├── manuscript/              # IEEE T-BIOM submission (14 pages)
+│   ├── paper.pdf           # Compiled manuscript (1.54 MB)
+│   ├── paper.tex           # LaTeX source
+│   ├── references.bib      # 31 references
 │   └── compile_paper.sh    # Compilation script
-├── figures/                 # All publication figures
+├── figures/                 # All 6 publication figures
 │   ├── age_patterns.pdf
 │   ├── boundary_violations.pdf
 │   ├── beta_regression_concepts.pdf
 │   ├── variance_analysis.pdf
 │   ├── prediction_intervals.pdf
 │   └── operational_impact.pdf
-├── data/                    # Data information (see data/README.md)
-├── supplementary/           # Additional materials
-│   ├── notebooks/          # Jupyter notebooks with analysis code
-│   ├── presentations/      # Conference talks and slides
-│   └── references/         # Key papers referenced
-├── LICENSE                  # MIT License
-└── README.md               # This file
+├── supplementary/
+│   ├── notebooks/          # Jupyter analysis
+│   │   ├── StoreyAaron_BetaRegression.ipynb
+│   │   └── StoreyAaron_ChildFaceAnalysis.ipynb
+│   ├── presentations/
+│   └── references/         # Bahmani 2023, Deb 2018 PDFs
+├── data/                   # See data/README.md
+└── README.md              # This file
 ```
 
-## Paper Details
-
-**Title**: "Beta Regression Framework for Modeling Bounded Biometric Performance in Child Face Recognition"
-
-**Authors**: Aaron W. Storey
-
-**Target Journal**: IEEE Transactions on Biometrics, Behavior, and Identity Science (T-BIOM)
-
-**Keywords**: Biometric evaluation, bounded outcomes, beta regression, child face recognition, longitudinal analysis, variance modeling, statistical methods
-
-**Abstract**: Child face recognition systems degrade over time, yet standard statistical models can produce nonsensical predictions when modeling this degradation. This paper examines beta regression as an alternative approach for bounded biometric performance metrics. Building on empirical work by Deb et al. and Bahmani et al., this analysis identifies a methodological gap: while these studies appropriately use standardized scores, practitioners often need to model raw recognition rates for operational decisions. The simulations show that linear mixed models applied to bounded data can predict impossible values---in one case exceeding 100% true accept rate. Beta regression eliminates these violations while maintaining comparable fit. The approach captures age-dependent patterns naturally: young children (ages 3-5) show rapid performance decline, middle childhood (5.5-7 years) exhibits surprising stability near 80%, and older children experience delayed degradation after puberty onset. Perhaps most importantly for operational systems, beta regression correctly models the variance structure of bounded data, with uncertainty peaking at 50% performance. This has practical implications---the analysis suggests the stable middle-age group could use extended re-enrollment intervals, potentially improving resource allocation for missing child searches. Implementation code and guidelines are provided for when this approach offers advantages over traditional methods. Available at: https://github.com/astoreyai/memory-augmented-transformers.
-
-## Quick Start
-
-### Prerequisites
-- Python (≥ 3.8) with scientific computing libraries
-- LaTeX distribution (for reproducing manuscript)
-
-### Implementation
-The beta regression framework is implemented using Python's statsmodels library. See the Jupyter notebooks in `supplementary/notebooks/` for complete analysis code:
-
-#### Interactive Notebooks
+## Interactive Notebooks
 
 | Notebook | Description | Run in Colab |
-|----------|-------------|--------------|
-| **StoreyAaron_BetaRegression.ipynb** | Complete statistical analysis and model comparison | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/astoreyai/memory-augmented-transformers/blob/main/beta-regression-framework/supplementary/notebooks/StoreyAaron_BetaRegression.ipynb) |
-| **StoreyAaron_ChildFaceAnalysis.ipynb** | Empirical data exploration and visualization | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/astoreyai/memory-augmented-transformers/blob/main/beta-regression-framework/supplementary/notebooks/StoreyAaron_ChildFaceAnalysis.ipynb) |
-
-## Key Results
-
-### Age-Specific Degradation Patterns
-- **Young children (3-5 years)**: Rapid decline from 97.8% to 63.1%
-- **Middle children (5.5-7 years)**: Remarkable stability around 80% ("Golden Window")
-- **Older children (7.5-9 years)**: Delayed degradation after 4 years
-
-### Model Comparison
-| Model | RMSE | R² | Invalid Predictions | Max Violation |
-|-------|------|-----|-------------------|---------------|
-| Linear Mixed | 0.0649 | 0.7600 | 229 | >100% |
-| Beta Regression | 0.0665 | 0.7479 | 0 | — |
-
-### Operational Impact
-- 16-month improvement in re-enrollment timing for stable age group
-- Elimination of impossible predictions maintains system credibility
-- Direct support for missing children search protocols
+|----------|-------------|--------------||
+| **BetaRegression.ipynb** | Complete statistical analysis | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/astoreyai/Dissertation/blob/main/beta-regression-framework/supplementary/notebooks/StoreyAaron_BetaRegression.ipynb) |
+| **ChildFaceAnalysis.ipynb** | Data exploration & visualization | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/astoreyai/Dissertation/blob/main/beta-regression-framework/supplementary/notebooks/StoreyAaron_ChildFaceAnalysis.ipynb) |
 
 ## Citation
 
-Please cite this work as:
-
-### BibTeX
 ```bibtex
 @article{storey2025beta,
-  title     = {Beta Regression Framework for Modeling Bounded Biometric Performance in Child Face Recognition},
-  author    = {Storey, Aaron W.},
-  journal   = {IEEE Transactions on Biometrics, Behavior, and Identity Science},
-  year      = {2025},
-  volume    = {},
-  number    = {},
-  pages     = {},
-  doi       = {},
-  note      = {Under review at Clarkson, for submission to IEEE T-BIOM}
+  title   = {Beta Regression Framework for Modeling Bounded Biometric
+             Performance in Child Face Recognition: A Methodological
+             Framework with Simulation-Based Validation},
+  author  = {Storey, Aaron W. and Imtiaz, Masudul H.},
+  journal = {IEEE Transactions on Biometrics, Behavior, and Identity Science},
+  year    = {2025},
+  note    = {Under review at Clarkson University for IEEE T-BIOM submission}
 }
 ```
 
-### APA Format
-Storey, A. W. (2025). Beta regression framework for modeling bounded biometric performance in child face recognition. *IEEE Transactions on Biometrics, Behavior, and Identity Science*. Under review at Clarkson, for submission to IEEE T-BIOM.
+## Ethics & Data
 
-### Plain Text
-Aaron W. Storey. "Beta Regression Framework for Modeling Bounded Biometric Performance in Child Face Recognition." IEEE Transactions on Biometrics, Behavior, and Identity Science, 2025. Under review at Clarkson, for submission to IEEE T-BIOM.
+**Ethics Statement**: This research uses only synthetic data generated computationally to match published degradation patterns. No human subjects were involved. No biometric samples from real individuals were collected. IRB approval not required for purely methodological work.
 
-## Reproducibility
+**Data Sources**: Simulation parameters calibrated to:
+- Bahmani et al. (2023) - Young Face Aging (YFA) dataset patterns
+- Deb et al. (2018) - Children Longitudinal Face (CLF) dataset patterns
 
-All results in this paper can be reproduced using:
-1. **Jupyter Notebooks**: See `supplementary/notebooks/` for complete analysis
-2. **LaTeX Source**: Compile `manuscript/paper.tex` to reproduce the paper
-3. **Figures**: All figures in `figures/` are generated from the analysis
-4. **Simulation Code**: Python implementations of the simulation code, synthetic datasets calibrated to match YFA patterns, and beta regression model fitting using Python's statsmodels library
-5. **Tutorial**: Hands-on tutorial notebook guides readers through applying these methods to their own longitudinal biometric data
+**Validation**: We actively seek collaboration with researchers who have access to CLF or YFA datasets for real-data validation.
 
-## Future Work
+## Path to Operational Deployment
 
-- **Paper 2**: Empirical validation on real Children Face Aging dataset
-- **Paper 3**: Memory-augmented transformers leveraging these statistical insights
-- **Software Package**: Python package for biometric beta regression
-- **GitHub Repository**: Implementation code available at https://github.com/astoreyai/memory-augmented-transformers
+1. **Immediate (12-18 months)**: Validation on CLF/YFA datasets
+2. **Medium-term (24-36 months)**: Operational pilot testing
+3. **Long-term**: Integration with NCMEC search protocols
 
 ## Contact
 
-**Aaron W. Storey**  
-Department of Computer Science  
-Clarkson University  
-Potsdam, NY 13699 USA  
-Email: storeyaw@clarkson.edu  
-ORCID: [0009-0009-5560-0015](https://orcid.org/0009-0009-5560-0015)
+**Aaron W. Storey**
+Department of Computer Science
+Clarkson University, Potsdam, NY 13699
+storeyaw@clarkson.edu
+
+**Masudul H. Imtiaz**
+Department of Electrical & Computer Engineering
+Clarkson University, Potsdam, NY 13699
+mimtiaz@clarkson.edu
 
 ## License
 
-This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
+MIT License - see [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
 - Clarkson University for research support
-- Authors of the Children Longitudinal Face (Deb et al., 2018) and Young Face Aging (Bahmani et al., 2023) datasets
-- IEEE T-BIOM community for research standards
-
-## Related Datasets
-
-For researchers interested in validating these methods:
-- **Children Longitudinal Face (CLF)**: [Contact Deb et al.](mailto:)
-- **Young Face Aging (YFA)**: [Contact Bahmani et al.](mailto:)
+- Deb et al. (2018) and Bahmani et al. (2023) for foundational datasets
+- Reviewers for constructive feedback emphasizing synthetic data transparency
 
 ---
 
-*This research contributes to the critical mission of reuniting missing children with their families through improved biometric modeling.*
+*This research contributes to reuniting missing children with their families through improved statistical modeling of biometric recognition systems.*
