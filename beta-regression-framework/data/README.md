@@ -92,8 +92,8 @@ This directory is intentionally empty because:
 ## Note on Data Availability Statement
 
 From the paper (Section: Data Availability):
-> "The simulation code, synthetic datasets, and analysis scripts used in this study are available at: https://github.com/astoreyai/Dissertation. The repository provides Python implementations of the simulation code, synthetic datasets calibrated to match YFA patterns, and Jupyter notebooks for reproducing all analyses, including beta regression model fitting using Python's statsmodels library."
+> "The simulation code, synthetic datasets, and analysis scripts used in this study are available at: https://github.com/astoreyai/beta-regression-pediatricface. The repository provides Python implementations of the simulation code, synthetic datasets calibrated to match YFA patterns, and Jupyter notebooks for reproducing all analyses, including beta regression model fitting using Python's statsmodels library."
 
 ---
 
-*For questions about data generation or validation protocols, contact: storeyaw@clarkson.edu or mimtiaz@clarkson.edu*
+*For questions about data generation or validation protocols, contact: storeyaw@clarkson.edu, mimtiaz@clarkson.edu, or smondal@clarkson.edu*

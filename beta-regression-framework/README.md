@@ -24,6 +24,12 @@ Director, AI Vision, Health, Biometrics, and Applied Computing (AVHBAC) Lab
 Clarkson University, Potsdam, NY, USA
 mimtiaz@clarkson.edu | ORCID: 0000-0001-5528-482X
 
+**Sumona Mondal**
+Professor of Statistics, Department of Mathematics
+Co-director, MS Data Science Program
+Clarkson University, Potsdam, NY, USA
+smondal@clarkson.edu | ORCID: 0000-0002-0197-9148
+
 ## Paper Details
 
 **Full Title**: "Beta Regression Framework for Modeling Bounded Biometric Performance in Child Face Recognition: A Methodological Framework with Simulation-Based Validation"
@@ -156,7 +162,7 @@ beta-regression-framework/
   title   = {Beta Regression Framework for Modeling Bounded Biometric
              Performance in Child Face Recognition: A Methodological
              Framework with Simulation-Based Validation},
-  author  = {Storey, Aaron W. and Imtiaz, Masudul H.},
+  author  = {Storey, Aaron W. and Imtiaz, Masudul H. and Mondal, Sumona},
   journal = {IEEE Transactions on Biometrics, Behavior, and Identity Science},
   year    = {2025},
   note    = {Under review at Clarkson University for IEEE T-BIOM submission}

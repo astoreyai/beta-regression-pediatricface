@@ -22,20 +22,23 @@
 
 \title{Beta Regression Framework for Modeling Bounded Biometric Performance in Child Face Recognition: A Methodological Framework with Simulation-Based Validation}
 
-\author{\IEEEauthorblockN{Aaron W. Storey\,\IEEEmembership{Member,~IEEE}
-and~Masudul H. Imtiaz}\\
+\author{\IEEEauthorblockN{Aaron W. Storey\,\IEEEmembership{Member,~IEEE},
+Masudul H. Imtiaz,
+and~Sumona Mondal}\\
 \IEEEauthorblockA{Department of Computer Science, Clarkson University, Potsdam, NY, USA\\
 storeyaw@clarkson.edu, ORCID: 0009-0009-5560-0015}\\
 \IEEEauthorblockA{Department of Electrical and Computer Engineering, Clarkson University, Potsdam, NY, USA\\
-mimtiaz@clarkson.edu, ORCID: 0000-0001-5528-482X}}
+mimtiaz@clarkson.edu, ORCID: 0000-0001-5528-482X}\\
+\IEEEauthorblockA{Department of Mathematics, Clarkson University, Potsdam, NY, USA\\
+smondal@clarkson.edu, ORCID: 0000-0002-0197-9148}}
 
 \markboth{IEEE Transactions on Biometrics, Behavior, and Identity Science}%
-{Storey \& Imtiaz: Beta Regression for Bounded Biometric Performance}
+{Storey et al.: Beta Regression for Bounded Biometric Performance}
 
 \maketitle
 
 \begin{abstract}
-This paper presents a beta regression framework for modeling bounded biometric performance metrics in longitudinal studies. While existing research appropriately uses standardized scores and transformations, operational stakeholders often require direct modeling of recognition rates for decision-making. Through simulation studies, we demonstrate that direct application of linear mixed models to True Accept Rates can produce invalid predictions exceeding probability bounds, while beta regression maintains mathematical validity. Using synthetic data calibrated to published child face recognition patterns (Deb et al., Bahmani et al.), beta regression correctly captures heteroscedastic variance structures and provides appropriate confidence intervals for bounded outcomes. The framework identifies distinct age-specific degradation patterns: rapid decline for ages 3--5, surprising stability for ages 5.5--7, and delayed degradation after puberty. Simulation results suggest differentiated re-enrollment strategies could optimize resource allocation, though validation on real biometric data is required before operational deployment. We provide implementation code and a detailed validation protocol to facilitate real-data studies. This work bridges statistical methodology and biometric evaluation, offering a complementary tool when percentage-based metrics are operationally essential. Available at: \url{https://github.com/astoreyai/memory-augmented-transformers}.
+This paper presents a beta regression framework for modeling bounded biometric performance metrics in longitudinal studies. While existing research appropriately uses standardized scores and transformations, operational stakeholders often require direct modeling of recognition rates for decision-making. Through simulation studies, we demonstrate that direct application of linear mixed models to True Accept Rates can produce invalid predictions exceeding probability bounds, while beta regression maintains mathematical validity. Using synthetic data calibrated to published child face recognition patterns (Deb et al., Bahmani et al.), beta regression correctly captures heteroscedastic variance structures and provides appropriate confidence intervals for bounded outcomes. The framework identifies distinct age-specific degradation patterns: rapid decline for ages 3--5, surprising stability for ages 5.5--7, and delayed degradation after puberty. Simulation results suggest differentiated re-enrollment strategies could optimize resource allocation, though validation on real biometric data is required before operational deployment. We provide implementation code and a detailed validation protocol to facilitate real-data studies. This work bridges statistical methodology and biometric evaluation, offering a complementary tool when percentage-based metrics are operationally essential. Available at: \url{https://github.com/astoreyai/beta-regression-pediatricface}.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -369,7 +372,7 @@ The practical implications emerged most clearly in re-enrollment timing recommen
 
 The 16-month difference for middle-aged children is particularly significant---this ``golden window'' of facial stability could extend search capabilities for long-term missing child cases.
 
-Full simulation code and detailed results are available at: \url{https://github.com/astoreyai/memory-augmented-transformers}.
+Full simulation code and detailed results are available at: \url{https://github.com/astoreyai/beta-regression-pediatricface}.
 
 The simulation's impossible predictions---rates exceeding 100\%---illustrate why proper statistical modeling matters for operational systems. While these violations come from this synthetic demonstration, they highlight a real risk: practitioners applying linear models directly to bounded performance metrics could generate outputs that undermine system credibility. When communicating with families of missing children or law enforcement agencies, system outputs must be both mathematically valid and interpretable.
 
@@ -394,7 +397,7 @@ To validate these findings on actual longitudinal biometric datasets (CLF, YFA, 
 
 \textbf{Falsification Conditions:} If real data shows: (1) linear models produce no boundary violations over 8 years, (2) variance is approximately constant across performance levels, or (3) transformation-based approaches provide equivalent or better predictive accuracy, then beta regression offers minimal practical advantage.
 
-Code and detailed instructions available at: \url{https://github.com/astoreyai/memory-augmented-transformers}
+Code and detailed instructions available at: \url{https://github.com/astoreyai/beta-regression-pediatricface}
 
 \section{Research Roadmap}
 \label{sec:roadmap}
@@ -516,7 +519,7 @@ By choosing appropriate statistical tools for specific evaluation contexts, rese
 This research uses only synthetic data generated computationally to match published degradation patterns from the literature. No human subjects were involved in data collection for this study. The synthetic datasets were calibrated to aggregate statistical patterns reported in peer-reviewed publications (Deb et al., Bahmani et al.) and do not contain any identifiable information or biometric samples from real individuals. Therefore, institutional review board approval was not required for this purely methodological work.
 
 \section*{Data Availability}
-The simulation code, synthetic datasets, and analysis scripts used in this study are available at: \url{https://github.com/astoreyai/memory-augmented-transformers}. The repository provides Python implementations of the simulation code, synthetic datasets calibrated to match YFA patterns, and Jupyter notebooks for reproducing all analyses, including beta regression model fitting using Python's statsmodels library. A hands-on tutorial notebook guides readers through applying these methods to their own longitudinal biometric data.
+The simulation code, synthetic datasets, and analysis scripts used in this study are available at: \url{https://github.com/astoreyai/beta-regression-pediatricface}. The repository provides Python implementations of the simulation code, synthetic datasets calibrated to match YFA patterns, and Jupyter notebooks for reproducing all analyses, including beta regression model fitting using Python's statsmodels library. A hands-on tutorial notebook guides readers through applying these methods to their own longitudinal biometric data.
 
 \section*{Acknowledgment}
 The authors thank the reviewers for their constructive feedback and acknowledge the limitations of synthetic-only validation. The authors welcome collaboration with researchers who have access to longitudinal biometric datasets to conduct real-data validation of this framework.
@@ -534,6 +537,12 @@ His research focuses on the development of agentic AI systems and language model
 received the Ph.D. degree in electrical engineering from the University of Alabama, Tuscaloosa, AL, USA, in 2019. He is currently an Assistant Professor in the Department of Electrical and Computer Engineering at Clarkson University, Potsdam, NY, USA, where he directs the AI Vision, Health, Biometrics, and Applied Computing (AVHBAC) laboratory.
 
 His research interests include wearable sensor systems, biometric recognition (particularly pediatric biometrics), machine learning for physiological signal processing, and mHealth technologies. Dr. Imtiaz has authored over 100 peer-reviewed publications in IEEE transactions, conferences, and other venues. His recent work focuses on longitudinal biometric recognition in children, deepfake detection, and advanced sensing technologies for healthcare applications.
+\end{IEEEbiography}
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{author3.jpeg}}]{Sumona Mondal}
+is a Professor of Statistics in the Department of Mathematics and Co-director of the MS Data Science Program at Clarkson University, Potsdam, NY, USA.
+
+Her research interests lie in the application and development of statistical methods for environmental, biological, and public health inquiries. She values interdisciplinary collaborations, as they provide opportunities to contribute and learn in a cooperative environment. Particularly, she finds excitement in situations where scientists are utilizing methods that could greatly benefit from statistical development, and she works with them to enhance those methods. Professor Mondal has repeatedly applied her statistical, mathematical, and computational knowledge, skills, and experience to model and estimate, predict, and simulate in various problem domains. Inferential statistics and data analysis represent her two main areas of interest.
 \end{IEEEbiography}
 
 \end{document}

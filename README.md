@@ -1,7 +1,7 @@
 # Beta Regression Framework for Child Face Recognition: A Methodological Framework with Simulation-Based Validation
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Paper Status](https://img.shields.io/badge/Status-Ready%20for%20Submission-brightgreen.svg)](https://github.com/astoreyai/Dissertation)
+[![Paper Status](https://img.shields.io/badge/Status-Ready%20for%20Submission-brightgreen.svg)](https://github.com/astoreyai/beta-regression-pediatricface)
 
 ## Overview
 
@@ -23,6 +23,12 @@ Assistant Professor, Electrical & Computer Engineering
 Director, AI Vision, Health, Biometrics, and Applied Computing (AVHBAC) Lab
 Clarkson University, Potsdam, NY, USA
 mimtiaz@clarkson.edu | ORCID: [0000-0001-5528-482X](https://orcid.org/0000-0001-5528-482X)
+
+**Sumona Mondal**
+Professor of Statistics, Department of Mathematics
+Co-director, MS Data Science Program
+Clarkson University, Potsdam, NY, USA
+smondal@clarkson.edu | ORCID: [0000-0002-0197-9148](https://orcid.org/0000-0002-0197-9148)
 
 ## Repository Structure
 
@@ -129,8 +135,8 @@ TAR_ij = logit^(-1)(β₀ + β₁·age_i + β₂·ΔT_ij + β₃·age_i×ΔT_ij 
 
 | Notebook | Description | Run in Colab |
 |----------|-------------|--------------|
-| **BetaRegression.ipynb** | Complete statistical analysis | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/astoreyai/Dissertation/blob/main/beta-regression-framework/supplementary/notebooks/StoreyAaron_BetaRegression.ipynb) |
-| **ChildFaceAnalysis.ipynb** | Data exploration & visualization | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/astoreyai/Dissertation/blob/main/beta-regression-framework/supplementary/notebooks/StoreyAaron_ChildFaceAnalysis.ipynb) |
+| **BetaRegression.ipynb** | Complete statistical analysis | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/astoreyai/beta-regression-pediatricface/blob/main/beta-regression-framework/supplementary/notebooks/StoreyAaron_BetaRegression.ipynb) |
+| **ChildFaceAnalysis.ipynb** | Data exploration & visualization | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/astoreyai/beta-regression-pediatricface/blob/main/beta-regression-framework/supplementary/notebooks/StoreyAaron_ChildFaceAnalysis.ipynb) |
 
 ## Quick Start
 
@@ -200,7 +206,7 @@ TAR_ij = logit^(-1)(β₀ + β₁·age_i + β₂·ΔT_ij + β₃·age_i×ΔT_ij 
   title   = {Beta Regression Framework for Modeling Bounded Biometric
              Performance in Child Face Recognition: A Methodological
              Framework with Simulation-Based Validation},
-  author  = {Storey, Aaron W. and Imtiaz, Masudul H.},
+  author  = {Storey, Aaron W. and Imtiaz, Masudul H. and Mondal, Sumona},
   journal = {IEEE Transactions on Biometrics, Behavior, and Identity Science},
   year    = {2025},
   note    = {Under review at Clarkson University for IEEE T-BIOM submission}
@@ -218,6 +224,11 @@ storeyaw@clarkson.edu
 Department of Electrical & Computer Engineering
 Clarkson University, Potsdam, NY 13699
 mimtiaz@clarkson.edu
+
+**Sumona Mondal**
+Department of Mathematics
+Clarkson University, Potsdam, NY 13699
+smondal@clarkson.edu
 
 ## License
 
