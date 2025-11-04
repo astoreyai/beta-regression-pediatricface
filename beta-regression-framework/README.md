@@ -71,14 +71,15 @@ smondal@clarkson.edu | ORCID: 0000-0002-0197-9148
 
 ## Simulation Details
 
-Synthetic data generated using:
+Synthetic data generated using beta distribution sampling:
 ```
-TAR_ij = logit^(-1)(β₀ + β₁·age_i + β₂·ΔT_ij + β₃·age_i×ΔT_ij + u_i + ε_ij)
+TAR_ij ~ Beta(μ_ij · φ, (1-μ_ij) · φ)
+where μ_ij computed from age-specific trajectories
 ```
 
 **Parameters calibrated to YFA patterns:**
-- u_i ~ N(0, 0.15²) - between-subject variation
-- ε_ij ~ N(0, 0.10²) - within-subject variability
+- u_i ~ N(0, 0.03²) - between-subject variation
+- φ = 50 - precision parameter
 - β₂ = -0.35 (ages 3-5: steep decline)
 - β₂ = -0.08 (ages 5.5-7: stability)
 - β₂ = -0.20 (ages 7.5-9: delayed degradation)
@@ -89,9 +90,9 @@ TAR_ij = logit^(-1)(β₀ + β₁·age_i + β₂·ΔT_ij + β₃·age_i×ΔT_ij 
 
 | Age Group | Pattern | TAR Change (6.5-8 years) |
 |-----------|---------|-------------------------|
-| 3-5 years | Rapid decline | 97.8% → 63.1% |
-| 5.5-7 years | **Stable "Golden Window"** | 97.9% → 80.2% |
-| 7.5-9 years | Delayed degradation | 98.3% → 65.6% |
+| 3-5 years | Rapid decline | 97.8% to 63.1% |
+| 5.5-7 years | Stable period | 97.9% to 80.2% |
+| 7.5-9 years | Delayed degradation | 98.3% to 65.6% |
 
 *Source: Bahmani et al. (2023), Table 3*
 
@@ -99,22 +100,22 @@ TAR_ij = logit^(-1)(β₀ + β₁·age_i + β₂·ΔT_ij + β₃·age_i×ΔT_ij 
 
 | Model | RMSE | R² | Invalid Predictions | Max Violation |
 |-------|------|-----|-------------------|---------------|
-| Linear Mixed | 0.0649 | 0.7600 | **229** | **>100%** |
-| Logit-transformed | 0.0770 | 0.6620 | 0 | — |
-| Beta Regression | 0.0665 | 0.7479 | **0** | — |
+| Linear Mixed | 0.0649 | 0.7600 | 229 | >100% |
+| Logit-transformed | 0.0770 | 0.6620 | 0 | None |
+| Beta Regression | 0.0665 | 0.7479 | 0 | None |
 
 *Beta regression eliminates boundary violations while maintaining comparable fit (RMSE difference: 0.0016)*
 
 ## When to Use Beta Regression
 
-✅ **Use beta regression when:**
+**Use beta regression when:**
 - Modeling population-level recognition rates (TAR/FAR) over time
 - Long-term predictions (>2 years) where boundaries approached
 - Variance patterns impact operational decisions
 - Stakeholder communication requires interpretable percentages
 - Bounded outcome interpretation essential
 
-❌ **Do NOT use when:**
+**Do NOT use when:**
 - Working with raw similarity scores (use ROC analysis)
 - Individual matching decisions (use score-level methods)
 - Real-time threshold adaptation needed
@@ -151,9 +152,9 @@ beta-regression-framework/
 ## Interactive Notebooks
 
 | Notebook | Description | Run in Colab |
-|----------|-------------|--------------||
-| **BetaRegression.ipynb** | Complete statistical analysis | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/astoreyai/Dissertation/blob/main/beta-regression-framework/supplementary/notebooks/StoreyAaron_BetaRegression.ipynb) |
-| **ChildFaceAnalysis.ipynb** | Data exploration & visualization | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/astoreyai/Dissertation/blob/main/beta-regression-framework/supplementary/notebooks/StoreyAaron_ChildFaceAnalysis.ipynb) |
+|----------|-------------|--------------|
+| **BetaRegression.ipynb** | Complete statistical analysis | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/astoreyai/beta-regression-pediatricface/blob/main/supplementary/notebooks/StoreyAaron_BetaRegression.ipynb) |
+| **ChildFaceAnalysis.ipynb** | Data exploration and visualization | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/astoreyai/beta-regression-pediatricface/blob/main/supplementary/notebooks/StoreyAaron_ChildFaceAnalysis.ipynb) |
 
 ## Citation
 
